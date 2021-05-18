@@ -14,7 +14,12 @@ import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selector';
 
+import { TrackerProvider, Tracker } from 'react-tracker'
+import { trackProductClick } from './tracking/listeners/cart'
+
 import "./App.css";
+
+const tracker = new Tracker([trackProductClick])
 
 class App extends React.Component{
   unsubscribeFromAuth = null
@@ -45,6 +50,7 @@ class App extends React.Component{
 
   render(){
     return (
+      <TrackerProvider tracker={tracker}>
       <div>
         <Header />
         <Switch>
@@ -65,6 +71,7 @@ class App extends React.Component{
             />
         </Switch>
       </div>
+      </TrackerProvider>
     )
   }  
 }
