@@ -20,3 +20,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
+console.log('weird stuff: ', window.digitalData)
