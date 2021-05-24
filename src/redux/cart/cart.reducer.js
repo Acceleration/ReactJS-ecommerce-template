@@ -28,6 +28,13 @@ const cartReducer = (state = INITIAL_STATE, action) => {
             }
 
         case CartActionTypes.CLEAR_ITEM_FROM_CART:
+            const digitalCart = window.digitalData.cart
+            const itemBeingRemovedIdx = digitalCart.item.findIndex(item => item.productID = action.payload.id)
+            const totalBeingRemoved = digitalCart.item[itemBeingRemovedIdx].price.basePrice * digitalCart.item[itemBeingRemovedIdx].quantity
+            console.log(totalBeingRemoved)
+            digitalCart.price.basePrice -= totalBeingRemoved
+            digitalCart.item.splice(itemBeingRemovedIdx, 1)
+
             return {
                 ...state,
                 cartItems: state.cartItems.filter(
