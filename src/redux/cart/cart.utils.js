@@ -9,7 +9,7 @@ export const addItemsToCart = (cartItems, cartItemToAdd) => {
   currentDigitalCart.price.basePrice += cartItemToAdd.price
 
   if (existingCartItem) {
-    currentDigitalCart.item.find(item => item.productID === cartItemToAdd.id).quantity++
+    currentDigitalCart.item.find(item => item.productInfo.productID === cartItemToAdd.id).quantity++
     return cartItems.map(cartItem =>
       cartItem.id === cartItemToAdd.id ?
         { ...cartItem, quantity: cartItem.quantity + 1 } :
@@ -28,7 +28,7 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
   )
   const currentDigitalCart = window.digitalData.cart
   currentDigitalCart.price.basePrice -= cartItemToRemove.price
-  const cartItemToRemoveIdx = currentDigitalCart.item.findIndex((item, idx) => item.productID === cartItemToRemove.id)
+  const cartItemToRemoveIdx = currentDigitalCart.item.findIndex((item, idx) => item.productInfo.productID === cartItemToRemove.id)
   if (existingCartItem.quantity === 1) {
     currentDigitalCart.item.splice(cartItemToRemoveIdx, 1)
 
