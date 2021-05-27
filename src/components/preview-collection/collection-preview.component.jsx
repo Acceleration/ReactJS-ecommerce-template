@@ -19,9 +19,10 @@ import './collection-preview.styles.scss';
 
 class CollectionPreview extends React.Component {
     pageProductContribution = null
-
+    relevantItems = this.props.items.slice(0, 4)
     componentDidMount() {
         console.log('mounting CollectionsPreview')
+        console.log(this.props.items)
     }
 
     componentWillUnmount() {
@@ -32,8 +33,7 @@ class CollectionPreview extends React.Component {
         return (<div className='collection-preview' >
             <h1 className='title'>{this.props.title.toUpperCase()}</h1>
             <div className='preview'>
-                {this.props.items
-                    .filter((item, idx) => idx < 4)
+                {this.relevantItems
                     .map((item) => (
                         <CollectionItem key={item.id} item={item} category={this.props.title} />
                     ))}
