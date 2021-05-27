@@ -1,13 +1,20 @@
+import toAdobeData from './adobeData/toAdobeData.js'
 import { UserActionTypes } from './user.types.js'
 
 const INITIAL_STATE = {
     currentUser: null
 }
 
-const userReducer = (state = INITIAL_STATE, action ) => {
-    switch(action.type){
+const userReducer = (state = INITIAL_STATE, action) => {
+    switch (action.type) {
         case UserActionTypes.SET_CURRENT_USER:
-            return{
+            if (action.payload) {
+                const { email } = action.payload
+                window.digitalData.user[0].profile[0] = toAdobeData(email)
+
+            }
+
+            return {
                 ...state,
                 currentUser: action.payload
             }

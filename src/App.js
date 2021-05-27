@@ -21,14 +21,14 @@ import "./App.css";
 
 const tracker = new Tracker([trackProductClick])
 
-class App extends React.Component{
+class App extends React.Component {
   unsubscribeFromAuth = null
 
-  componentDidMount(){
-    const {setCurrentUser} = this.props
+  componentDidMount() {
+    const { setCurrentUser } = this.props
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if(userAuth){
+      if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth)
 
         userRef.onSnapshot(snapShot => {
@@ -38,49 +38,50 @@ class App extends React.Component{
           })
         });
       }
-      
+
       setCurrentUser(userAuth)
-      
+
     })
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.unsubscribeFromAuth()
   }
 
-  render(){
+  render() {
     return (
       <TrackerProvider tracker={tracker}>
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path='/checkout' component={CheckoutPage} />
-          <Route 
-          exact
-          path="/signin" 
-          render={() => 
-            this.props.currentUser ? (
+        <div>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route path="/shop" component={ShopPage} />
+            <Route exact path='/checkout' component={CheckoutPage} />
+            <Route path='/success' component={() => (<h1>Success!</h1>)} />
+            <Route
+              exact
+              path="/signin"
+              render={() =>
+                this.props.currentUser ? (
 
-              <Redirect to='/' />
-              ) : (
-                <SignInAndSignUp/>
+                  <Redirect to='/' />
+                ) : (
+                  <SignInAndSignUp />
                 )
-              } 
+              }
             />
-        </Switch>
-      </div>
+          </Switch>
+        </div>
       </TrackerProvider>
     )
-  }  
+  }
 }
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser
-}) 
+})
 
-const mapDispatchToProps = dispatch =>({
+const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 

@@ -26,7 +26,12 @@ const cartReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 cartItems: removeItemFromCart(state.cartItems, action.payload)
             }
-
+        case 'CLEAR_CART':
+            window.digitalData.cart = window.constructCart(String(Math.random()))
+            return {
+                ...state,
+                cartItems: []
+            }
         case CartActionTypes.CLEAR_ITEM_FROM_CART:
             const digitalCart = window.digitalData.cart
             const itemBeingRemovedIdx = digitalCart.item.findIndex(item => item.productInfo.productID = action.payload.id)

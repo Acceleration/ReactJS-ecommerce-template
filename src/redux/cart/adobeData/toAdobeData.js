@@ -1,5 +1,5 @@
 export default ({ id, price, quantity, imageUrl, name, category }) => ({
-  ...(price && {
+  ...(quantity && {
     price: {
       basePrice: price
     },

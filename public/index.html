@@ -29,6 +29,14 @@
   <link rel="icon" href="/favicon.ico" />
   <script>
     //https://www.w3.org/2013/12/ceddl-201312.pdf specification link
+    window.constructCart = (id) => ({
+      cartID: id,
+      price: {
+        currency: "USD",
+        basePrice: 0
+      },
+      item: []
+    })
     window.digitalData = {
       pageInstanceID: "Example page - production",
       page: {
@@ -59,56 +67,16 @@
           language: "en-US"
         }
       },
-      cart: {
-        cartID: "934856",
-        price: {
-          currency: "USD",
-          basePrice: 0
-        },
-        item: []
-      },
+      product: [],
+      cart: window.constructCart(String(Math.random())),
       //implies completed cart order
       transaction: {
 
       },
-      event: [{
-        category: {
-          primaryCategory: "Example event category",
-          subCategory: "Example sub-category"
-        }
-      }],
-      component: [{
-        componentInfo: {
-          componentID: "4921",
-          componentName: "Example component"
-        },
-        category: {
-          primaryCategory: "Example event category",
-          subCategory: "Example sub-category"
-        }
-      }],
       user: [{
-        segment: "Premium membership",
-        profile: [{
-          profileInfo: {
-            profileID: "exampleprofile",
-            userName: "exampleusername",
-            email: "user@example.com",
-            language: "en-US",
-            returningStatus: "New"
-          },
-          social: {
-            facebook: "examplefacebookid",
-            twitter: "exampletwitterhandle"
-          }
-        }]
+        segment: "Authenticated",
+        profile: []
       }],
-      privacy: {
-        accessCategories: [{
-          categoryName: "Default",
-          domains: ["adobedtm.com"]
-        }]
-      },
       version: "1.0"
     }
   </script>
