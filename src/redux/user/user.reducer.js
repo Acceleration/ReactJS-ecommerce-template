@@ -12,6 +12,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 const { email } = action.payload
                 window.digitalData.user[0].profile[0] = toAdobeData(email)
 
+            } else {
+                window.digitalData.user[1].profile[0] = toAdobeData(null)
             }
 
             return {
