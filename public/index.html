@@ -37,6 +37,17 @@
       },
       item: []
     })
+    window.constructTransaction = (cart, profile, address) => ({
+      transactionID: cart.cartID,
+      ...(profile && {
+        profile,
+        profileInfo: profile.profileInfo
+      }),
+      address,
+      shippingAddress: address,
+      total: cart.price.baseprice,
+      item: cart.item
+    })
     window.digitalData = {
       pageInstanceID: "Example page - production",
       page: {
