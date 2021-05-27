@@ -31,6 +31,7 @@ class CheckoutPage extends React.Component {
       alert('Please check your inputs')
     } else {
       console.log('success')
+      window.digitalData.transaction = window.constructTransaction(window.digitalData.cart, window.digitalData.user[0].profile[0], { line1: this.state.street, city: this.state.city, stateProvince: this.state.state, postalCode: this.state.zipcode, country: this.state.country })
       this.props.clearCart()
       this.props.history.push('/success')
     }
